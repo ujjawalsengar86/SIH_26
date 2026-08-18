@@ -56,7 +56,7 @@ export function AuthProvider({ children }) {
             const receivedToken = response.token;
             setToken(receivedToken);
             localStorage.setItem(TOKEN_KEY, receivedToken);
-
+            
             const userInfo = {
                 email: credentials.email,
                 name: credentials.name || credentials.email.split('@')[0],

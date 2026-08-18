@@ -1,17 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowLeftIcon } from './icons';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
 export default function FormPanel({
-                                      isLogin,
-                                      onToggle,
-                                      formData,
-                                      onChange,
-                                      onSubmit,
-                                      showPassword,
-                                      onTogglePassword,
-                                  }) {
+    isLogin,
+    onToggle,
+    formData,
+    onChange,
+    onSubmit,
+    showPassword,
+    onTogglePassword,
+    isLoading = false,
+    errorMessage = null,
+}) {
     return (
         <section
             className={`relative z-[1] flex min-h-[640px] w-1/2 flex-col justify-center bg-white px-12 py-10
@@ -20,19 +23,28 @@ export default function FormPanel({
         ${isLogin ? '-translate-x-full' : 'translate-x-0'}`}
         >
             <div className="mx-0 w-full max-w-[440px] animate-fade-in-content text-left">
-                <button
-                    type="button"
-                    onClick={onToggle}
-                    className="mb-4 inline-flex items-center gap-1.5 border-none bg-transparent p-0 text-[0.78rem] text-slate-500 transition-colors hover:text-green-700"
-                >
-                    <ArrowLeftIcon />
-                    <span>Back to Home Page</span>
-                </button>
+                <div className="mb-4 flex items-center justify-between">
+                    <Link
+                        to="/"
+                        className="inline-flex items-center gap-1.5 border-none bg-transparent p-0 text-[0.78rem] text-slate-500 transition-colors hover:text-green-700"
+                    >
+                        <ArrowLeftIcon />
+                        <span>Back to Home Page</span>
+                    </Link>
+
+                    <button
+                        type="button"
+                        onClick={onToggle}
+                        className="text-[0.78rem] font-semibold text-green-700 hover:underline"
+                    >
+                        {isLogin ? 'Switch to Sign Up' : 'Switch to Login'}
+                    </button>
+                </div>
 
                 <div className="mb-2.5 text-left">
-          <span className="inline-block rounded-md border border-green-200 bg-green-50 px-2.5 py-[3px] text-[0.65rem] font-bold tracking-widest text-green-700">
-            {isLogin ? 'WORKSPACE LOGIN' : 'WORKSPACE REGISTRATION'}
-          </span>
+                    <span className="inline-block rounded-md border border-green-200 bg-green-50 px-2.5 py-[3px] text-[0.65rem] font-bold tracking-widest text-green-700">
+                        {isLogin ? 'WORKSPACE LOGIN' : 'WORKSPACE REGISTRATION'}
+                    </span>
                 </div>
 
                 <h1 className="mb-1.5 text-left text-[1.85rem] font-extrabold tracking-tight text-ink">
@@ -41,8 +53,8 @@ export default function FormPanel({
 
                 <p className="mb-[22px] text-left text-[0.82rem] leading-relaxed text-slate-500">
                     {isLogin
-                        ? 'Sign in to access your secure real-time workspace and operational insights'
-                        : 'Register to access your secure real-time workspace and operational insights'}
+                        ? 'Sign in to access your secure real-time LCA workspace and operational insights'
+                        : 'Register to access your secure real-time LCA workspace and operational insights'}
                 </p>
 
                 <form className="flex flex-col gap-3.5" onSubmit={onSubmit}>
@@ -52,6 +64,8 @@ export default function FormPanel({
                             onChange={onChange}
                             showPassword={showPassword}
                             onTogglePassword={onTogglePassword}
+                            isLoading={isLoading}
+                            errorMessage={errorMessage}
                         />
                     ) : (
                         <RegisterForm
@@ -59,6 +73,8 @@ export default function FormPanel({
                             onChange={onChange}
                             showPassword={showPassword}
                             onTogglePassword={onTogglePassword}
+                            isLoading={isLoading}
+                            errorMessage={errorMessage}
                         />
                     )}
                 </form>

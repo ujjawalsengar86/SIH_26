@@ -12,9 +12,9 @@ export default function Home() {
             <div className="pointer-events-none absolute left-[20%] top-[15%] z-0 h-[550px] w-[550px] animate-pulse-orb rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.16)_0%,rgba(22,163,74,0.08)_40%,transparent_70%)] blur-[80px]" />
             <div className="pointer-events-none absolute bottom-[10%] right-[18%] z-0 h-[480px] w-[480px] animate-pulse-orb-reverse rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.12)_0%,rgba(22,163,74,0.06)_45%,transparent_70%)] blur-[90px]" />
 
-            <Header
-                onLoginClick={() => navigate('/login')}
-                onSignupClick={() => navigate('/signup')}
+            <Header 
+                onLoginClick={() => navigate('/login')} 
+                onSignupClick={() => navigate('/signup')} 
             />
 
             <main className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-col items-center justify-center text-center">
