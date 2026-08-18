@@ -30,14 +30,66 @@ export default function AuthPage() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const action = isLogin ? 'Signed in successfully' : 'Account registered successfully';
-        const identifier = formData.username || formData.email || 'User';
-        setToastMessage(`${action} for ${identifier}!`);
-        setTimeout(() => setToastMessage(null), 4000);
-    };
 
+        try {
+            const endpoint = isLogin
+                ? 'http://localhost:8080/api/auth/login'
+                : 'http://localhost:8080/api/auth/register';
+
+            const requestBody = isLogin
+                ? {
+                    email: formData.email,
+                    password: formData.password,
+                }
+                : {
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                };
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody),
+            });
+
+            // Read response as text first
+            const text = await response.text();
+
+            // Parse JSON only if response has content
+            const data = text ? JSON.parse(text) : null;
+
+            if (!response.ok) {
+                const errorMessage =
+                    data?.message ||
+                    data?.error ||
+                    `Request failed . Sorry Please try Again!!`;
+
+                throw new Error(errorMessage);
+            }
+
+            const identifier = formData.email;
+
+            setToastMessage(
+                isLogin
+                    ? `Signed in successfully for ${identifier}!`
+                    : `Account registered successfully for ${identifier}!`
+            );
+
+            setTimeout(() => setToastMessage(null), 4000);
+
+
+        } catch (error) {
+
+            setToastMessage(error.message);
+
+            setTimeout(() => setToastMessage(null), 4000);
+        }
+    };
     const toggleMode = () => setIsLogin((prev) => !prev);
 
     return (

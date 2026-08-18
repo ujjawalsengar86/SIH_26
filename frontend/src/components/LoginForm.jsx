@@ -5,15 +5,7 @@ import { UserIcon, MailIcon, LockIcon, ArrowRightIcon } from './icons';
 export default function LoginForm({ formData, onChange, showPassword, onTogglePassword }) {
     return (
         <>
-            <FormField
-                id="login-username"
-                name="username"
-                label="Username"
-                icon={<UserIcon />}
-                placeholder="alex_morgan"
-                value={formData.username}
-                onChange={onChange}
-            />
+
 
             <FormField
                 id="login-email"
