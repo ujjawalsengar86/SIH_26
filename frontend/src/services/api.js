@@ -39,8 +39,8 @@ async function handleResponse(response) {
         }
 
         if (response.status === 401 || response.status === 403) {
-            errorMessage = errorMessage === 'An unexpected error occurred.'
-                ? 'Invalid email or password.'
+            errorMessage = errorMessage === 'An unexpected error occurred.' 
+                ? 'Invalid email or password.' 
                 : errorMessage;
         } else if (response.status === 400 && errorMessage.toLowerCase().includes('password')) {
             errorMessage = 'Password must be at least 8 characters long.';
