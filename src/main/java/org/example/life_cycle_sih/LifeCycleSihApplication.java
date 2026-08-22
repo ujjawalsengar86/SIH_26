@@ -8,6 +8,5 @@ public class LifeCycleSihApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LifeCycleSihApplication.class, args);
-        System.out.println("Hello ");
     }
 }

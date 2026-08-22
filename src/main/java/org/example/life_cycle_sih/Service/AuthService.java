@@ -6,6 +6,7 @@ import org.example.life_cycle_sih.dto.request.LoginRequest;
 import org.example.life_cycle_sih.dto.request.RegisterRequest;
 import org.example.life_cycle_sih.dto.response.AuthResponse;
 import org.example.life_cycle_sih.dto.response.MessageResponse;
+//import org.example.life_cycle_sih.enums.Role;
 import org.example.life_cycle_sih.repository.UserRepository;
 import org.example.life_cycle_sih.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,10 +35,8 @@ public class AuthService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         userRepository.save(user);
-String token = jwtService.generateToken(request.getEmail());
-        return new MessageResponse(
-                "Registration successful"
-        );
+   return new MessageResponse("Registration successful");
+
     }
     public AuthResponse login(LoginRequest request) {
 
